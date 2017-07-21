@@ -23,7 +23,10 @@ and what you should write is the sayHi function that makes the code above work,
 // 1. Write a function called first that returns the first item of the array using a callback function
 
   // Code Here
+function first(array,cb){
+ return cb(array[0]);
 
+}
   
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
@@ -35,6 +38,9 @@ first(names, function(firstName){
 // 2. Write a function called last which returns the last item of the array using a callback function.
 
   //Code Here
+  function last(array,cb){
+    cb(array[array.length -1]);
+  }
 
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -45,7 +51,9 @@ last(names, function(lastName){
 // 3. Write a function called multiply that multiplies two numbers using a callback function.
 
   //Code Here
-
+ function multiply(x,y,cb){
+   return cb(x*y);
+ }
 
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
@@ -57,6 +65,9 @@ multiply(4, 3, function(answer){
 // If it does, return true using the callback, if not return false.
 
   //Code Here 
+  function contains(array,name,cb){
+    cb(array.indexOf(name)!==-1); 
+  }
 
 contains(names, 'Colt', function(result){
   if(result === true){
@@ -72,6 +83,11 @@ contains(names, 'Colt', function(result){
 // the callback function with the array of unique names.
 
     //Code Here
+    function uniq(array,cb){
+      return cb(array.filter((value,index,array)=>{
+        return array.indexOf(value)===index;
+      }));
+    }
 
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
@@ -81,7 +97,13 @@ uniq(names, function(uniqArr){
 // 6. Write a function called each that takes in an array of names. For each item, use a callback 
 // function to return the indices and item.
 
-    //Code Here 
+    //Code Here
+    function each(array,cb){
+      array.forEach((value,index)=>{
+           cb(value,index);
+      });
+      
+    } 
 
 each(names, function(item, indice){
   console.log('The item in the ' + indice + ' position is ' + item)
@@ -93,6 +115,17 @@ each(names, function(item, indice){
 // and returns that user.
 
  //Code Here
+ function getUserById(users,id,cb){
+   var result = users.filter((x) =>{
+   
+     return x.id === id;
+   }); 
+console.log("result is " + JSON.stringify(result[0]));
+   cb(result[0]);
+
+
+   
+ }
 
 var users = [
   {
